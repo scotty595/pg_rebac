@@ -2,14 +2,14 @@
   "name": "pg_rebac",
   "abstract": "Permission-aware SQL for Postgres: a SpiceDB permission, enforced inside the query plan",
   "description": "Keeps a local, indexed projection of one SpiceDB permission and gives every query a fence (rebac.readable_set) that Postgres inlines into a semi-join, so it applies before the order by and the limit. Pure SQL plus the rebacd sync daemon.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "maintainer": "Louvain <scott@louvain.ai>",
   "license": "apache_2_0",
   "release_status": "testing",
   "provides": {
     "pg_rebac": {
       "file": "sql/rebac.sql",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "abstract": "Permission-aware SQL for Postgres (pure-SQL install)"
     }
   },

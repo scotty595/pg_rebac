@@ -1362,11 +1362,11 @@ checksum = "63b8176103e19a2643978565ca18b50549f6101881c443590420e4dc998a3c69"
 
 [[package]]
 name = "rebac-schema"
-version = "0.2.0"
+version = "0.3.0"
 
 [[package]]
 name = "rebacd"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "axum",

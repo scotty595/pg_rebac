@@ -12,7 +12,7 @@ categories = ["database", "authentication"]
 rust-version.workspace = true
 
 [dependencies]
-rebac-schema = { path = "../rebac-schema", version = "0.2.0" }
+rebac-schema = { path = "../rebac-schema", version = "0.3.0" }
 anyhow = "1"
 base64 = "0.22"
 axum = "0.8"
