@@ -1,5 +1,5 @@
-# Publishes a release tag everywhere, in order: crates.io (rebac-schema, then rebacd), npm, the ghcr.io image, the
-# GitHub Release's assets, PGXN; then it runs the served quickstart and deploys pgrebac.com from the tag. Every step
+# Publishes a release tag everywhere, in order: crates.io (rebac-schema, then rebacd); npm and the ghcr.io image; the
+# GitHub Release's assets; PGXN; then it runs the served quickstart and deploys pgrebac.com from the tag. Every step
 # skips what is already published, so a failed run is fixed by running it again. release-please.yml starts it when a
 # release pull request is merged; by hand:
 #
@@ -132,8 +132,8 @@ jobs:
           [ "$DRY_RUN" = false ] || args+=(--dry-run)
           cargo publish "${args[@]}"
 
-  # Trusted publishing with provenance: no token, no one-time password. The one step whose failure does not stop the
-  # rest: the image, the Release and the site go out, and this job is re-run once npm is fixed.
+  # Trusted publishing with provenance: no token, no one-time password. Nothing waits on it, so a failure here (say,
+  # the trusted publisher not yet set up) stops nothing else, and this job is re-run once npm is fixed.
   npm:
     needs: [plan, crates]
     if: ${{ !cancelled() && needs.plan.result == 'success' && needs.crates.result != 'failure' && needs.plan.outputs.npm == 'true' }}
@@ -165,7 +165,7 @@ jobs:
 
   # Each architecture is built on its own runner and pushed by digest, with an SBOM and provenance attached.
   image-build:
-    needs: [plan, crates, npm]
+    needs: [plan, crates]
     if: ${{ !cancelled() && needs.plan.result == 'success' && needs.crates.result != 'failure' && needs.plan.outputs.image == 'true' }}
     strategy:
       matrix:

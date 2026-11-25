@@ -69,12 +69,12 @@ A release is one act: merging the release pull request.
   site's one-file quickstart (`site/public/quickstart.yml`) at the new version. To change what it says, change the
   commits, not the pull request: release-please rewrites it on every push.
 - **Merging it** tags `vX.Y.Z`, creates the GitHub Release, and starts `.github/workflows/publish.yml`. That
-  workflow checks the tag against every manifest and runs the SQL suite, then publishes in order: crates.io
-  (`rebac-schema`, then `rebacd`), npm (with provenance), the `ghcr.io/louvain-ai/rebacd` image (linux/amd64 and
-  linux/arm64, with an SBOM and provenance, signed with cosign), the Release's assets (the SQL, `SHA256SUMS`, the
-  PGXN zip), PGXN. Last, it runs the served quickstart against what it published and deploys pgrebac.com from the
-  tag's tree, so the site never shows unreleased docs. Every step skips what is already published, so a failed run
-  is fixed by running it again.
+  workflow checks the tag against every manifest and runs the SQL suite, then publishes crates.io (`rebac-schema`,
+  then `rebacd`); then npm (with provenance) and, beside it, the `ghcr.io/louvain-ai/rebacd` image (linux/amd64 and
+  linux/arm64, with an SBOM and provenance, signed with cosign); then the Release's assets (the SQL, `SHA256SUMS`,
+  the PGXN zip) and PGXN. Last, it runs the served quickstart against what it published and deploys pgrebac.com
+  from the tag's tree, so the site never shows unreleased docs. Every step skips what is already published, so a
+  failed run is fixed by running it again; an npm failure holds up nothing else.
 - **A dry run** builds and checks everything and publishes nothing:
   `gh workflow run publish.yml --ref vX.Y.Z -f tag=vX.Y.Z` (`dry-run` defaults to true).
 - **A patch for an older minor version** is released from a maintenance branch `release-X.Y`, cut from the last
