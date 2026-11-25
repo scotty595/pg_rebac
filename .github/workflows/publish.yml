@@ -109,7 +109,7 @@ jobs:
   # cargo publishes rebac-schema first and waits for the index before rebacd, which depends on it.
   crates:
     needs: plan
-    if: needs.plan.outputs.crates
+    if: false # fork test only: never publish crates from the fork
     runs-on: ubuntu-latest
     environment: release
     permissions:
