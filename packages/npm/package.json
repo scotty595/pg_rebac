@@ -1,6 +1,6 @@
 {
   "name": "pg-rebac",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "pg_rebac's SQL, bundled: install the permission-aware fence into Postgres from your own migrations",
   "license": "Apache-2.0",
   "type": "module",
